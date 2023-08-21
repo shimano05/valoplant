@@ -1,5 +1,6 @@
 import Character from "@/components/character";
 import Map from "@/components/map";
+import Ui from "@/components/ui";
 
 import React, { useEffect, useState } from "react";
 
@@ -21,16 +22,13 @@ export default function Home() {
   return (
     <div>
       {Loading ? (
-        // <div className="justify-center flex h-screen">
-        <Map mapWidth={size.width} mapHeight={size.height} />
+        <div className="justify-center flex">
+          <Map mapWidth={700} mapHeight={700} />
+        </div>
       ) : (
-        // </div>
         <div>Loading</div>
       )}
-
-      {/* <div>
-        <Character />
-      </div> */}
+      <Ui />
     </div>
   );
 }
