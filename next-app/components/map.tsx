@@ -25,7 +25,7 @@ export default function Map({ mapWidth, mapHeight }: MapPropsType) {
 
   useEffect(() => {
     const img = new window.Image();
-    img.src = "/acent.png";
+    img.src = "map/acent.png";
     img.onload = () => {
       setMapElement(img);
     };
@@ -79,7 +79,7 @@ export default function Map({ mapWidth, mapHeight }: MapPropsType) {
   };
 
   return (
-    <Stage width={size.width} height={size.width}>
+    <Stage width={size.width} height={size.height}>
       {/* bgColorLayer */}
       <Layer>
         <Rect
@@ -101,12 +101,12 @@ export default function Map({ mapWidth, mapHeight }: MapPropsType) {
         }}
       >
         {isLoad && <Image image={mapElement} width={size.width} height={size.height} alt="map" />}
-        {isLoad && <Image image={charaElement} width={40} height={40} alt="chara" draggable />}
+        {/* {isLoad && <Image image={charaElement} width={40} height={40} alt="chara" draggable />} */}
       </Layer>
 
-      <Layer>
+      {/* <Layer>
         <Rect fill="black" width={700} height={100} x={0} y={600} />
-      </Layer>
+      </Layer> */}
     </Stage>
   );
 }
