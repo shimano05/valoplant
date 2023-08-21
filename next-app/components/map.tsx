@@ -101,12 +101,8 @@ export default function Map({ mapWidth, mapHeight }: MapPropsType) {
         }}
       >
         {isLoad && <Image image={mapElement} width={size.width} height={size.height} alt="map" />}
-        {/* {isLoad && <Image image={charaElement} width={40} height={40} alt="chara" draggable />} */}
+        {isLoad && <Image image={charaElement} width={40} height={40} alt="chara" draggable />}
       </Layer>
-
-      {/* <Layer>
-        <Rect fill="black" width={700} height={100} x={0} y={600} />
-      </Layer> */}
     </Stage>
   );
 }
