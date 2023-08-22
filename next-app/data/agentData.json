@@ -1,0 +1,222 @@
+[
+  {
+    "agentName": "アストラ",
+    "agentImg": "/character/Astra.png",
+    "skill": [
+      {
+        "skillName": " ノヴァパルス",
+        "skillImg": "/skill/astra/NovaPulse.png"
+      },
+      {
+        "skillName": "ネビュラ",
+        "skillImg": "/skill/astra/NebulaDissipate.png"
+      },
+      {
+        "skillName": "グラビティウェル",
+        "skillImg": "/skill/astra/GravityWell.png"
+      },
+      {
+        "skillName": "コズミックディバイド",
+        "skillImg": "/skill/astra/CosmicDivide.png"
+      }
+    ]
+  },
+  {
+    "agentName": "ブリムストーン",
+    "agentImg": "/character/Brimstone.png",
+    "skill": [
+      {
+        "skillName": "インセンディアリー",
+        "skillImg": "/skill/brimstone/Incendiary.png"
+      },
+      {
+        "skillName": "スカイスモーク",
+        "skillImg": "/skill/brimstone/SkySmoke.png"
+      },
+      {
+        "skillName": "スティムビーコン",
+        "skillImg": "/skill/brimstone/StimBeacon.png"
+      },
+      {
+        "skillName": "オービタルストライク",
+        "skillImg": "/skill/brimstone/OrbitalStrike.png"
+      }
+    ]
+  },
+  {
+    "agentName": "ハーバー",
+    "agentImg": "/character/Harbor.png",
+    "skill": [
+      {
+        "skillName": "コーヴ",
+        "skillImg": "/skill/harbor/Cove.png"
+      },
+      {
+        "skillName": "ハイタイド",
+        "skillImg": "/skill/harbor/HighTide.png"
+      },
+      {
+        "skillName": "カスケード",
+        "skillImg": "/skill/harbor/Cascade.png"
+      },
+      {
+        "skillName": "レコニング",
+        "skillImg": "/skill/harbor/Reckoning.png"
+      }
+    ]
+  },
+  {
+    "agentName": "オーメン",
+    "agentImg": "/character/Omen.png",
+    "skill": [
+      {
+        "skillName": "パラノイア",
+        "skillImg": "/skill/omen/Paranoia.png"
+      },
+      {
+        "skillName": "ダークカヴァー",
+        "skillImg": "/skill/omen/DarkCover.png"
+      },
+      {
+        "skillName": "シュラウドステップ",
+        "skillImg": "/skill/omen/ShroudedStep.png"
+      },
+      {
+        "skillName": "フロム・ザ・シャドウズ",
+        "skillImg": "/skill/omen/FromTheShadows.png"
+      }
+    ]
+  },
+  {
+    "agentName": "ヴァイパー",
+    "agentImg": "/character/Viper.png",
+    "skill": [
+      {
+        "skillName": "ポイズンクラウド",
+        "skillImg": "/skill/viper/PoisonCloud.png"
+      },
+      {
+        "skillName": "トキシックスクリーン",
+        "skillImg": "/skill/viper/ToxicScreen.png"
+      },
+      {
+        "skillName": "スネークバイト",
+        "skillImg": "/skill/viper/SnakeBite.png"
+      },
+      {
+        "skillName": "ヴァイパーズピット",
+        "skillImg": "/skill/viper/Viper'sPit.png"
+      }
+    ]
+  },
+  {
+    "agentName": "ジェット",
+    "agentImg": "/character/Jett.png",
+    "skill": [
+      {
+        "skillName": "インセンディアリー",
+        "skillImg": "/skill/brimstone/Incendiary.png"
+      },
+      {
+        "skillName": "スカイスモーク",
+        "skillImg": "/skill/brimstone/SkySmoke.png"
+      },
+      {
+        "skillName": " スティムビーコン",
+        "skillImg": "/skill/brimstone/StimBeacon.png"
+      },
+      {
+        "skillName": "オービタルストライク",
+        "skillImg": "/skill/brimstone/OrbitalStrike.png"
+      }
+    ]
+  },
+  {
+    "agentName": "ネオン",
+    "agentImg": "/character/Neon.png",
+    "skill": [
+      {
+        "skillName": "インセンディアリー",
+        "skillImg": "/skill/brimstone/Incendiary.png"
+      },
+      {
+        "skillName": "スカイスモーク",
+        "skillImg": "/skill/brimstone/SkySmoke.png"
+      },
+      {
+        "skillName": " スティムビーコン",
+        "skillImg": "/skill/brimstone/StimBeacon.png"
+      },
+      {
+        "skillName": "オービタルストライク",
+        "skillImg": "/skill/brimstone/OrbitalStrike.png"
+      }
+    ]
+  },
+  {
+    "agentName": "フェニックス",
+    "agentImg": "/character/Phoenix.png",
+    "skill": [
+      {
+        "skillName": "インセンディアリー",
+        "skillImg": "/skill/brimstone/Incendiary.png"
+      },
+      {
+        "skillName": "スカイスモーク",
+        "skillImg": "/skill/brimstone/SkySmoke.png"
+      },
+      {
+        "skillName": " スティムビーコン",
+        "skillImg": "/skill/brimstone/StimBeacon.png"
+      },
+      {
+        "skillName": "オービタルストライク",
+        "skillImg": "/skill/brimstone/OrbitalStrike.png"
+      }
+    ]
+  },
+  {
+    "agentName": "レイズ",
+    "agentImg": "/character/Raze.png",
+    "skill": [
+      {
+        "skillName": "インセンディアリー",
+        "skillImg": "/skill/brimstone/Incendiary.png"
+      },
+      {
+        "skillName": "スカイスモーク",
+        "skillImg": "/skill/brimstone/SkySmoke.png"
+      },
+      {
+        "skillName": " スティムビーコン",
+        "skillImg": "/skill/brimstone/StimBeacon.png"
+      },
+      {
+        "skillName": "オービタルストライク",
+        "skillImg": "/skill/brimstone/OrbitalStrike.png"
+      }
+    ]
+  },
+  {
+    "agentName": "ヨル",
+    "agentImg": "/character/Yoru.png",
+    "skill": [
+      {
+        "skillName": "インセンディアリー",
+        "skillImg": "/skill/brimstone/Incendiary.png"
+      },
+      {
+        "skillName": "スカイスモーク",
+        "skillImg": "/skill/brimstone/SkySmoke.png"
+      },
+      {
+        "skillName": " スティムビーコン",
+        "skillImg": "/skill/brimstone/StimBeacon.png"
+      },
+      {
+        "skillName": "オービタルストライク",
+        "skillImg": "/skill/brimstone/OrbitalStrike.png"
+      }
+    ]
+  }
+]
