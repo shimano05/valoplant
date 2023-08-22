@@ -1,6 +1,5 @@
-import Character from "@/components/character";
 import Map from "@/components/map";
-import Ui from "@/components/ui";
+import AgentInfoUI from "@/components/agentInfoUI";
 
 import React, { useEffect, useState } from "react";
 
@@ -10,25 +9,31 @@ export default function Home() {
     height: 0,
   });
 
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState<boolean>(false);
+
+  const [data, setData] = useState<string[]>([]);
 
   useEffect(() => {
     setSize({ width: window.screen.width, height: window.screen.height });
     setLoading(true);
   }, []);
 
-  console.log(size);
+  const handleUpdateData = (newData: string) => {
+    const newArray = [...data];
+    newArray.push(newData);
+    setData(newArray);
+  };
 
   return (
     <div>
       {Loading ? (
         <div className="justify-center flex">
-          <Map mapWidth={700} mapHeight={700} />
+          <Map mapWidth={700} mapHeight={700} selectData={data} />
         </div>
       ) : (
         <div>Loading</div>
       )}
-      <Ui />
+      <AgentInfoUI handleUpdateData={handleUpdateData} />
     </div>
   );
 }
