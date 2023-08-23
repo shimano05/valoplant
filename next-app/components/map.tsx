@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Stage, Layer, Image, Rect } from "react-konva";
 import Konva from "konva";
-import Data from "@/data/agentData.json";
+import AgentData from "@/data/agentData.json";
+import MapData from "@/data/mapData.json";
 
 type MapPropsType = {
   mapWidth: number;
   mapHeight: number;
   selectData: string[];
+  selectMap: string;
 };
 
 type MapSizeType = {
@@ -25,9 +27,13 @@ type AgentType = {
   skill: SkillType[];
 };
 
-export default function Map({ mapWidth, mapHeight, selectData }: MapPropsType) {
+type MapType = {
+  mapName: string;
+  mapImg: string;
+};
+
+export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapPropsType) {
   const [mapElement, setMapElement] = useState<HTMLImageElement | undefined>(undefined);
-  const [charaElement, setCharaElement] = useState<HTMLImageElement | undefined>(undefined);
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [scale, setScale] = useState<number>(1);
   const [size, setSize] = useState<MapSizeType>({
@@ -36,16 +42,20 @@ export default function Map({ mapWidth, mapHeight, selectData }: MapPropsType) {
   });
   const [bgPos, setBgPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // 元データ
-  const agentData: AgentType[] = Data;
+  // 元データagent&map
+  const agentData: AgentType[] = AgentData;
+  const mapData: MapType[] = MapData;
 
   // 各エージェントのImageElementをまとめた配列
   const [agentImgs, setAgentImgs] = useState<HTMLImageElement[]>([]);
 
+  // 各MapのImageElementをまとめた配列
+  const [mapImgs, setMapImgs] = useState<HTMLImageElement[]>([]);
+
   //TODO:非同期処理 resoleve Promise.allについて学習する
 
-  // ImageElementの配列の初期設定;
-  const createImgElement = async (agentData: AgentType[]) => {
+  // agentのImageElementの配列の初期設定;
+  const createAgentImgElement = async (agentData: AgentType[]) => {
     const imgArray: HTMLImageElement[] = [];
     const promises: Promise<void>[] = [];
 
@@ -68,10 +78,39 @@ export default function Map({ mapWidth, mapHeight, selectData }: MapPropsType) {
     setAgentImgs(imgArray);
   };
 
+  // agentのImageElementの配列の初期設定;
+  const createMapImgElement = async (mapData: MapType[]) => {
+    const imgArray: HTMLImageElement[] = [];
+    const promises: Promise<void>[] = [];
+
+    mapData.forEach((map) => {
+      const img = new window.Image();
+      img.src = map.mapImg;
+      img.alt = map.mapName;
+
+      const promise = new Promise<void>((resolve) => {
+        img.onload = () => {
+          imgArray.push(img);
+          resolve();
+        };
+      });
+
+      promises.push(promise);
+    });
+
+    await Promise.all(promises); // すべての画像の読み込みが完了するのを待つ
+    setMapImgs(imgArray);
+  };
+
   useEffect(() => {
-    createImgElement(agentData);
+    createAgentImgElement(agentData);
     setIsLoad(true);
   }, [agentData]);
+
+  useEffect(() => {
+    createMapImgElement(mapData);
+    setIsLoad(true);
+  }, [mapData]);
 
   // TODO:エージェント同様に画像を読み込んでマップを切り替えられるようにする
   // マップ読み込み（仮）
@@ -153,28 +192,40 @@ export default function Map({ mapWidth, mapHeight, selectData }: MapPropsType) {
           handleWheel(e);
         }}
       >
-        {isLoad && <Image image={mapElement} width={size.width} height={size.height} alt="map" />}
-
-        {agentImgs.flatMap((agent) =>
-          selectData.map(
-            (name, selectIndex) =>
-              name === agent.alt && (
-                // TODO:追加する際の初期値の設定&マウスをドラックして離したところを初期位置にする
+        {/* {isLoad && <Image image={mapElement} width={size.width} height={size.height} alt="map" />} */}
+        {isLoad &&
+          mapImgs.map(
+            (map) =>
+              selectMap === map.alt && (
                 <Image
-                  key={`selected-agent-${selectIndex}`}
-                  image={agent}
-                  width={50}
-                  height={50}
-                  alt={agent.alt}
-                  x={50 * selectIndex} // 位置をずらしてる（仮）
-                  y={0}
-                  fill="black"
-                  cornerRadius={10}
-                  draggable
+                  key={map.alt}
+                  image={map}
+                  width={size.width}
+                  height={size.height}
+                  alt={map.alt}
                 />
               )
-          )
-        )}
+          )}
+        {isLoad &&
+          agentImgs.flatMap((agent) =>
+            selectData.map(
+              (name, selectIndex) =>
+                name === agent.alt && (
+                  // TODO:追加する際の初期値の設定&マウスをドラックして離したところを初期位置にする
+                  <Image
+                    key={`element${selectIndex}`}
+                    image={agent}
+                    width={30}
+                    height={30}
+                    alt={agent.alt}
+                    x={50 * selectIndex} // 位置をずらしてる（仮）
+                    y={0}
+                    cornerRadius={10}
+                    draggable
+                  />
+                )
+            )
+          )}
       </Layer>
     </Stage>
   );

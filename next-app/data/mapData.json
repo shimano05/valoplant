@@ -1,0 +1,38 @@
+[
+  {
+    "mapName": "アセント",
+    "mapImg": "/map/Ascent.png"
+  },
+  {
+    "mapName": "スプリット",
+    "mapImg": "/map/Split.png"
+  },
+  {
+    "mapName": "フラクチャー",
+    "mapImg": "/map/Fracture.png"
+  },
+  {
+    "mapName": "パール",
+    "mapImg": "/map/Pearl.png"
+  },
+  {
+    "mapName": "バインド",
+    "mapImg": "/map/Bind.png"
+  },
+  {
+    "mapName": "アイスボックス",
+    "mapImg": "/map/Icebox.png"
+  },
+  {
+    "mapName": "ロータス",
+    "mapImg": "/map/Lotus.png"
+  },
+  {
+    "mapName": "ブリーズ",
+    "mapImg": "/map/Breeze.png"
+  },
+  {
+    "mapName": "ヘイヴン",
+    "mapImg": "/map/Haven.png"
+  }
+]

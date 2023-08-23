@@ -13,6 +13,8 @@ export default function Home() {
 
   const [data, setData] = useState<string[]>([]);
 
+  const [map, setMap] = useState<string>("アセント");
+
   useEffect(() => {
     // setSize({ width: window.screen.width, height: window.screen.height });
     setLoading(true);
@@ -24,16 +26,22 @@ export default function Home() {
     setData(newArray);
   };
 
+  const handleUpdateMap = (newMap: string) => {
+    setMap(newMap);
+  };
+
+  console.log(map);
+
   return (
     <div>
       {Loading ? (
         <div className="justify-center flex">
-          <Map mapWidth={700} mapHeight={700} selectData={data} />
+          <Map mapWidth={800} mapHeight={800} selectData={data} selectMap={map} />
         </div>
       ) : (
         <div>Loading</div>
       )}
-      <AgentInfoUI handleUpdateData={handleUpdateData} />
+      <AgentInfoUI handleUpdateData={handleUpdateData} handleUpdateMap={handleUpdateMap} />
     </div>
   );
 }
