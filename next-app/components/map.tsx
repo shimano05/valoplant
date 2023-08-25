@@ -33,7 +33,6 @@ type MapType = {
 };
 
 export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapPropsType) {
-  const [mapElement, setMapElement] = useState<HTMLImageElement | undefined>(undefined);
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [scale, setScale] = useState<number>(1);
   const [size, setSize] = useState<MapSizeType>({
@@ -46,18 +45,15 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
   const agentData: AgentType[] = AgentData;
   const mapData: MapType[] = MapData;
 
-  // 各エージェントのImageElementをまとめた配列
+  // 各agentとskillのImageElementをまとめた配列
   const [agentImgs, setAgentImgs] = useState<HTMLImageElement[]>([]);
 
   // 各MapのImageElementをまとめた配列
   const [mapImgs, setMapImgs] = useState<HTMLImageElement[]>([]);
 
-  // 各skillのImageElementをまとめた配列
-  const [skillImgs, setSkiiImgs] = useState<HTMLImageElement[]>([]);
-
   //TODO:非同期処理 resoleve Promise.allについて学習する
 
-  // agentのImageElementの配列の初期設定;
+  // agent&skillのImageElementの配列の初期設定;
   const createAgentImgElement = async (agentData: AgentType[]) => {
     const imgArray: HTMLImageElement[] = [];
     const promises: Promise<void>[] = [];
@@ -68,7 +64,7 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
       agentImg.alt = agent.agentName;
 
       const skillImgPromise = new Promise<void>((resolve) => {
-        agent.skill.forEach((skill) => {
+        agent.skill.forEach((skill: SkillType) => {
           const skillImg = new window.Image();
           skillImg.src = skill.skillImg;
           skillImg.alt = skill.skillName;
@@ -99,13 +95,13 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
     const promises: Promise<void>[] = [];
 
     mapData.forEach((map) => {
-      const img = new window.Image();
-      img.src = map.mapImg;
-      img.alt = map.mapName;
+      const mapImg = new window.Image();
+      mapImg.src = map.mapImg;
+      mapImg.alt = map.mapName;
 
       const promise = new Promise<void>((resolve) => {
-        img.onload = () => {
-          imgArray.push(img);
+        mapImg.onload = () => {
+          imgArray.push(mapImg);
           resolve();
         };
       });
@@ -119,23 +115,9 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
 
   useEffect(() => {
     createAgentImgElement(agentData);
-    setIsLoad(true);
-  }, [agentData]);
-
-  useEffect(() => {
     createMapImgElement(mapData);
     setIsLoad(true);
-  }, [mapData]);
-
-  // マップ読み込み
-  useEffect(() => {
-    const img = new window.Image();
-    img.src = "map/acent.png";
-    img.onload = () => {
-      setMapElement(img);
-    };
-    setIsLoad(true);
-  }, []);
+  }, [agentData, mapData]);
 
   // 拡大縮小の処理
   const handleWheel = (e: Konva.KonvaEventObject<WheelEvent>) => {
@@ -206,7 +188,7 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
           handleWheel(e);
         }}
       >
-        {/* {isLoad && <Image image={mapElement} width={size.width} height={size.height} alt="map" />} */}
+        {/* mapElement */}
         {isLoad &&
           mapImgs.map(
             (map) =>
@@ -220,6 +202,8 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
                 />
               )
           )}
+
+        {/* skill&agent Element */}
         {isLoad &&
           agentImgs.flatMap((img) =>
             selectData.map(
