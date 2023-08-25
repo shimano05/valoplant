@@ -52,6 +52,9 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
   // 各MapのImageElementをまとめた配列
   const [mapImgs, setMapImgs] = useState<HTMLImageElement[]>([]);
 
+  // 各skillのImageElementをまとめた配列
+  const [skillImgs, setSkiiImgs] = useState<HTMLImageElement[]>([]);
+
   //TODO:非同期処理 resoleve Promise.allについて学習する
 
   // agentのImageElementの配列の初期設定;
@@ -60,25 +63,37 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
     const promises: Promise<void>[] = [];
 
     agentData.forEach((agent) => {
-      const img = new window.Image();
-      img.src = agent.agentImg;
-      img.alt = agent.agentName;
+      const agentImg = new window.Image();
+      agentImg.src = agent.agentImg;
+      agentImg.alt = agent.agentName;
 
-      const promise = new Promise<void>((resolve) => {
-        img.onload = () => {
-          imgArray.push(img);
+      const skillImgPromise = new Promise<void>((resolve) => {
+        agent.skill.forEach((skill) => {
+          const skillImg = new window.Image();
+          skillImg.src = skill.skillImg;
+          skillImg.alt = skill.skillName;
+          skillImg.onload = () => {
+            imgArray.push(skillImg);
+            resolve();
+          };
+        });
+      });
+
+      const agentImgPromise = new Promise<void>((resolve) => {
+        agentImg.onload = () => {
+          imgArray.push(agentImg);
           resolve();
         };
       });
 
-      promises.push(promise);
+      promises.push(agentImgPromise, skillImgPromise);
     });
 
     await Promise.all(promises); // すべての画像の読み込みが完了するのを待つ
     setAgentImgs(imgArray);
   };
 
-  // agentのImageElementの配列の初期設定;
+  // mapのImageElementの配列の初期設定;
   const createMapImgElement = async (mapData: MapType[]) => {
     const imgArray: HTMLImageElement[] = [];
     const promises: Promise<void>[] = [];
@@ -112,8 +127,7 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
     setIsLoad(true);
   }, [mapData]);
 
-  // TODO:エージェント同様に画像を読み込んでマップを切り替えられるようにする
-  // マップ読み込み（仮）
+  // マップ読み込み
   useEffect(() => {
     const img = new window.Image();
     img.src = "map/acent.png";
@@ -207,17 +221,17 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
               )
           )}
         {isLoad &&
-          agentImgs.flatMap((agent) =>
+          agentImgs.flatMap((img) =>
             selectData.map(
               (name, selectIndex) =>
-                name === agent.alt && (
+                name === img.alt && (
                   // TODO:追加する際の初期値の設定&マウスをドラックして離したところを初期位置にする
                   <Image
                     key={`element${selectIndex}`}
-                    image={agent}
+                    image={img}
                     width={30}
                     height={30}
-                    alt={agent.alt}
+                    alt={img.alt}
                     x={50 * selectIndex} // 位置をずらしてる（仮）
                     y={0}
                     cornerRadius={10}
