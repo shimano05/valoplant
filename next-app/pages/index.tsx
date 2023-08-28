@@ -1,5 +1,6 @@
 import Map from "@/components/map";
 import AgentInfoUI from "@/components/agentInfoUI";
+import SelectMapUI from "@/components/selectMapUI";
 
 import React, { useEffect, useState } from "react";
 
@@ -58,8 +59,9 @@ export default function Home() {
         </div>
       )}
       <div className="bg-black flex justify-center items-center h-[20vh]">
-        <AgentInfoUI handleUpdateData={handleUpdateData} handleUpdateMap={handleUpdateMap} />
+        <AgentInfoUI handleUpdateData={handleUpdateData} />
       </div>
+      <SelectMapUI handleUpdateMap={handleUpdateMap} />
     </div>
   );
 }

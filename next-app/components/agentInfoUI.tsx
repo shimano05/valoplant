@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { Button, Tooltip } from "@material-tailwind/react";
+import { Tooltip } from "@material-tailwind/react";
 import { useState } from "react";
 import AgentData from "@/data/agentData.json";
-import MapData from "@/data/mapData.json";
 
 type SkillType = {
   skillName: string;
@@ -15,35 +14,22 @@ type AgentType = {
   skill: SkillType[];
 };
 
-type MapType = {
-  mapName: string;
-  mapImg: string;
-};
-
 type UIPropsType = {
   handleUpdateData: (newData: string) => void;
-  handleUpdateMap: (newMap: string) => void;
 };
 
-export default function AgentInfoUI({ handleUpdateData, handleUpdateMap }: UIPropsType) {
+export default function AgentInfoUI({ handleUpdateData }: UIPropsType) {
   // tooltipの開閉状態
   const [isOpen, setIsOpen] = useState<string>("");
 
   // エージェント情報
   const agentData: AgentType[] = AgentData;
 
-  const mapData: MapType[] = MapData;
-
   // 親コンポーネントにクリックした要素を渡す関数
   const selectElement = (e: React.MouseEvent<HTMLImageElement>) => {
     const value = e.currentTarget.alt;
     setIsOpen("");
     handleUpdateData(value);
-  };
-
-  const selectMap = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const value = e.currentTarget.value;
-    handleUpdateMap(value);
   };
 
   // 各エージェントのスキルtooltips・上方向に出てくるメニュー
@@ -96,13 +82,6 @@ export default function AgentInfoUI({ handleUpdateData, handleUpdateMap }: UIPro
               />
             </Tooltip>
           </div>
-        ))}
-      </div>
-      <div>
-        {mapData.map((map) => (
-          <Button key={map.mapName} onClick={(e) => selectMap(e)} value={map.mapName}>
-            {map.mapName}
-          </Button>
         ))}
       </div>
     </div>
