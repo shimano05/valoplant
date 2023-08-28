@@ -19,13 +19,16 @@ export default function SelectMapUI({ handleUpdateMap }: UIPropsType) {
   };
 
   return (
+    // TODO:w-fullとw-maxの違いについて調べる
     <div className="flex flex-col items-center w-full">
       {mapData.map((map) => (
         <Button
           key={map.mapName}
           onClick={(e) => selectMap(e)}
           value={map.mapName}
-          className="m-1 w-7/12"
+          className="m-1 w-7/12 rounded-full"
+          variant="gradient"
+          color="blue"
         >
           {map.mapName}
         </Button>

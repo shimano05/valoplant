@@ -39,6 +39,7 @@ export default function Home() {
     <div style={{ height: size.height }}>
       {loading && (
         <div className="flex h-[80vh]">
+          {/* MAPUI */}
           <div className="bg-yellow-500 w-1/4 flex justify-center items-center">
             <SelectMapUI handleUpdateMap={handleUpdateMap} />
           </div>
@@ -54,6 +55,7 @@ export default function Home() {
           </ul>
         </div>
       )}
+      {/* エージェント＆スキルUI */}
       <div className="bg-black flex justify-center items-center h-[20vh]">
         <AgentInfoUI handleUpdateData={handleUpdateData} />
       </div>
