@@ -39,13 +39,9 @@ export default function Home() {
     <div style={{ height: size.height }}>
       {loading && (
         <div className="flex h-[80vh]">
-          <ul className="bg-yellow-500 w-1/4">
-            <li>hello</li>
-            <li>hello</li>
-            <li>hello</li>
-            <li>hello</li>
-            <li>hello</li>
-          </ul>
+          <div className="bg-yellow-500 w-1/4 flex justify-center items-center">
+            <SelectMapUI handleUpdateMap={handleUpdateMap} />
+          </div>
 
           <Map reSize={size} selectData={data} selectMap={map} />
 
@@ -61,7 +57,6 @@ export default function Home() {
       <div className="bg-black flex justify-center items-center h-[20vh]">
         <AgentInfoUI handleUpdateData={handleUpdateData} />
       </div>
-      <SelectMapUI handleUpdateMap={handleUpdateMap} />
     </div>
   );
 }

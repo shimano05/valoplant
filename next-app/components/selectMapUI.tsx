@@ -19,14 +19,17 @@ export default function SelectMapUI({ handleUpdateMap }: UIPropsType) {
   };
 
   return (
-    <div>
-      <div>
-        {mapData.map((map) => (
-          <Button key={map.mapName} onClick={(e) => selectMap(e)} value={map.mapName}>
-            {map.mapName}
-          </Button>
-        ))}
-      </div>
+    <div className="flex flex-col items-center w-full">
+      {mapData.map((map) => (
+        <Button
+          key={map.mapName}
+          onClick={(e) => selectMap(e)}
+          value={map.mapName}
+          className="m-1 w-7/12"
+        >
+          {map.mapName}
+        </Button>
+      ))}
     </div>
   );
 }
