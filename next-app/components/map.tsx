@@ -213,7 +213,7 @@ export default function Map({ selectData, selectMap, reSize }: MapPropsType) {
                 name === img.alt && (
                   // TODO:追加する際の初期値の設定&マウスをドラックして離したところを初期位置にする
                   <Image
-                    key={`element${selectIndex}`}
+                    key={`${img.alt}${selectIndex}`}
                     image={img}
                     width={30}
                     height={30}
