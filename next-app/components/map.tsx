@@ -8,6 +8,7 @@ type MapPropsType = {
   selectData: string[];
   selectMap: string;
   reSize: MapSizeType;
+  switchStatus: boolean;
 };
 
 type MapSizeType = {
@@ -31,7 +32,7 @@ type MapType = {
   mapImg: string;
 };
 
-export default function Map({ selectData, selectMap, reSize }: MapPropsType) {
+export default function Map({ selectData, selectMap, reSize, switchStatus }: MapPropsType) {
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [scale, setScale] = useState<number>(1);
   const [size, setSize] = useState<MapSizeType>({

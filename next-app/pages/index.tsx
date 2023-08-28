@@ -13,6 +13,8 @@ export default function Home() {
 
   const [size, setSize] = useState({ width: 0, height: 0 });
 
+  const [switchStatus, setSwitchStatus] = useState<boolean>(true);
+
   const handleResize = () => {
     setSize({ width: window.innerWidth * 0.7, height: window.innerHeight * 0.8 });
   };
@@ -33,7 +35,11 @@ export default function Home() {
     setMap(newMap);
   };
 
-  console.log();
+  const handleSwitchTeam = (newStatus: boolean) => {
+    setSwitchStatus(newStatus);
+  };
+
+  console.log(switchStatus);
 
   return (
     <div style={{ height: size.height }}>
@@ -44,7 +50,7 @@ export default function Home() {
             <SelectMapUI handleUpdateMap={handleUpdateMap} />
           </div>
 
-          <Map reSize={size} selectData={data} selectMap={map} />
+          <Map reSize={size} selectData={data} selectMap={map} switchStatus={switchStatus} />
 
           <ul className="bg-yellow-500 w-1/4">
             <li>hello</li>
@@ -57,7 +63,7 @@ export default function Home() {
       )}
       {/* エージェント＆スキルUI */}
       <div className="bg-black flex justify-center items-center h-[20vh]">
-        <AgentInfoUI handleUpdateData={handleUpdateData} />
+        <AgentInfoUI handleUpdateData={handleUpdateData} handleSwitchTeam={handleSwitchTeam} />
       </div>
     </div>
   );
