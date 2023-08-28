@@ -5,10 +5,9 @@ import AgentData from "@/data/agentData.json";
 import MapData from "@/data/mapData.json";
 
 type MapPropsType = {
-  mapWidth: number;
-  mapHeight: number;
   selectData: string[];
   selectMap: string;
+  reSize: MapSizeType;
 };
 
 type MapSizeType = {
@@ -32,12 +31,12 @@ type MapType = {
   mapImg: string;
 };
 
-export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapPropsType) {
+export default function Map({ selectData, selectMap, reSize }: MapPropsType) {
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [scale, setScale] = useState<number>(1);
   const [size, setSize] = useState<MapSizeType>({
-    width: mapWidth,
-    height: mapHeight,
+    width: 0,
+    height: 0,
   });
   const [bgPos, setBgPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
@@ -114,17 +113,18 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
   };
 
   useEffect(() => {
+    setSize({ width: reSize.width, height: reSize.height }); // リサイズ時にサイズを更新
     createAgentImgElement(agentData);
     createMapImgElement(mapData);
     setIsLoad(true);
-  }, [agentData, mapData]);
+  }, [agentData, mapData, reSize]);
 
   // 拡大縮小の処理
   const handleWheel = (e: Konva.KonvaEventObject<WheelEvent>) => {
     e.evt.preventDefault();
 
     // TODO: stage: Stage | nullを正しい型設定に変更する
-    const stage: Stage | null = e.target.getStage();
+    const stage: Stage | null = e.currentTarget.getStage();
     if (!stage) {
       return; // stage が null の場合は何もしない
     }
@@ -196,7 +196,9 @@ export default function Map({ mapWidth, mapHeight, selectData, selectMap }: MapP
                 <Image
                   key={map.alt}
                   image={map}
-                  width={size.width}
+                  x={(size.width - size.height) / 2}
+                  y={(size.height - size.height) / 2}
+                  width={size.height}
                   height={size.height}
                   alt={map.alt}
                 />

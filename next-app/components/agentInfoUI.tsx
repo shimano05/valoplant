@@ -20,12 +20,12 @@ type MapType = {
   mapImg: string;
 };
 
-type UiPropsType = {
+type UIPropsType = {
   handleUpdateData: (newData: string) => void;
   handleUpdateMap: (newMap: string) => void;
 };
 
-export default function Ui({ handleUpdateData, handleUpdateMap }: UiPropsType) {
+export default function AgentInfoUI({ handleUpdateData, handleUpdateMap }: UIPropsType) {
   // tooltipの開閉状態
   const [isOpen, setIsOpen] = useState<string>("");
 
@@ -69,7 +69,7 @@ export default function Ui({ handleUpdateData, handleUpdateMap }: UiPropsType) {
   return (
     <div>
       {/* キャラクターリストの大枠 */}
-      <div className=" flex justify-center bg-black">
+      <div className="flex flex-wrap">
         {agentData.map((agent: AgentType) => (
           // まとまり
           <div
